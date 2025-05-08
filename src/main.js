@@ -1,6 +1,9 @@
 import "./style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const numberActions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const mathActions = ["+", "-", "*", "/", "%"];
+
 function createCalculator() {
   const app = document.querySelector("#app");
   app.innerHTML = `
@@ -21,6 +24,22 @@ function createCalculator() {
       </div>
     </div>
   `;
+
+  renderNumberButtons();
+}
+
+function renderNumberButtons() {
+  const container = document.getElementById("number-buttons");
+
+  numberActions.forEach((n) => {
+    const col = document.createElement("div");
+    col.className = "col";
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline-primary w-100";
+    btn.textContent = n;
+    col.appendChild(btn);
+    container.appendChild(col);
+  });
 }
 
 createCalculator();
