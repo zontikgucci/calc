@@ -26,6 +26,7 @@ function createCalculator() {
   `;
 
   renderNumberButtons();
+  renderMathButtons();
 }
 
 function renderNumberButtons() {
@@ -39,6 +40,17 @@ function renderNumberButtons() {
     btn.textContent = n;
     col.appendChild(btn);
     container.appendChild(col);
+  });
+}
+
+function renderMathButtons() {
+  const container = document.getElementById("math-buttons");
+
+  mathActions.forEach((action) => {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline-danger w-100 mb-2";
+    btn.textContent = action;
+    container.appendChild(btn);
   });
 }
 
