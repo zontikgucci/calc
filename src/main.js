@@ -50,8 +50,19 @@ function renderMathButtons() {
     const btn = document.createElement("button");
     btn.className = "btn btn-outline-danger w-100 mb-2";
     btn.textContent = action;
+    btn.onclick = () => handleAction(action);
     container.appendChild(btn);
   });
+}
+
+function handleAction(action) {
+  const lastIndex = historyList.length - 1;
+  if (currentNumber) {
+    historyList.push(currentNumber, action);
+    currentNumber = "";
+  } else if (!isEmpty(historyList)) {
+    historyList[lastIndex] = action;
+  }
 }
 
 createCalculator();
