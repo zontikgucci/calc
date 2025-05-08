@@ -4,6 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const numberActions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const mathActions = ["+", "-", "*", "/", "%"];
 
+let currentNumber = "";
+let historyList = [];
+
 function createCalculator() {
   const app = document.querySelector("#app");
   app.innerHTML = `
@@ -27,6 +30,7 @@ function createCalculator() {
 
   renderNumberButtons();
   renderMathButtons();
+  updateDisplay();
 }
 
 function renderNumberButtons() {
@@ -38,6 +42,10 @@ function renderNumberButtons() {
     const btn = document.createElement("button");
     btn.className = "btn btn-outline-primary w-100";
     btn.textContent = n;
+    btn.onclick = () => {
+      currentNumber += n.toString();
+      updateDisplay();
+    };
     col.appendChild(btn);
     container.appendChild(col);
   });
@@ -62,6 +70,35 @@ function handleAction(action) {
     currentNumber = "";
   } else if (!isEmpty(historyList)) {
     historyList[lastIndex] = action;
+  }
+  updateDisplay();
+}
+
+function updateDisplay() {
+  document.getElementById("input").value = currentNumber;
+  document.getElementById("history").textContent = historyList.join(" ") || "0";
+  document.getElementById("result").textContent = `= ${calculate(
+    historyList,
+    currentNumber
+  )}`;
+}
+
+function calculate(historyList, currentNumber) {
+  const calcArr = [...historyList];
+  if (!currentNumber && calcArr.length % 2 === 0) {
+    calcArr.pop();
+  }
+  const expr = [...calcArr, currentNumber].join(" ");
+  try {
+    let result = eval(expr);
+
+    if (!Number.isInteger(result)) {
+      result = result.toFixed(2);
+    }
+
+    return result ?? 0;
+  } catch (e) {
+    return 0;
   }
 }
 
