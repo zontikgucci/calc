@@ -1,25 +1,26 @@
 import "./style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import javascriptLogo from "./javascript.svg";
-import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.js";
 
-document.querySelector("#app").innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
+function createCalculator() {
+  const app = document.querySelector("#app");
+  app.innerHTML = `
     <div class="card">
-      <button id="counter" type="button"></button>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <b>Калькулятор</b>
+        <span class="badge bg-success" id="result">= 0</span>
+      </div>
+      <div class="card-body">
+        <div id="history" class="mb-2 text-muted">0</div>
+        <input id="input" type="text" class="form-control mb-3" readonly />
+        <div class="row g-2">
+          <div class="col-9">
+            <div id="number-buttons" class="row row-cols-3 g-2"></div>
+          </div>
+          <div class="col-3" id="math-buttons"></div>
+        </div>
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`;
+  `;
+}
 
-setupCounter(document.querySelector("#counter"));
+createCalculator();
