@@ -61,6 +61,16 @@ function renderMathButtons() {
     btn.onclick = () => handleAction(action);
     container.appendChild(btn);
   });
+
+  const clearBtn = document.createElement("button");
+  clearBtn.className = "btn btn-warning w-100 mb-2";
+  clearBtn.textContent = "C";
+  clearBtn.onclick = () => {
+    currentNumber = "";
+    historyList = [];
+    updateDisplay();
+  };
+  container.appendChild(clearBtn);
 }
 
 function handleAction(action) {
